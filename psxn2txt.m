@@ -129,12 +129,19 @@ rol = rol(idx);
 pit = pit(idx);
 
 % Clean up variables and filenames for text file.
-Datetime = dat;
+dat = datevec(dat);
+Year = dat(:,1);
+Month = dat(:,2);
+Day = dat(:,3);
+Hour = dat(:,4);
+Minute = dat(:,5);
+Second = dat(:,6);
+
 HeadingTrue = hdt;
 Heave = hve;
 Roll = rol;
 Pitch = pit;
 
 % Makes and saves table for text file.
-t = table(Datetime,HeadingTrue,Heave,Roll,Pitch);
+t = table(Year,Month,Day,Hour,Minute,Second,HeadingTrue,Heave,Roll,Pitch);
 writetable(t,[filename '.txt']);

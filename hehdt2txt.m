@@ -88,9 +88,19 @@ dat = datetime(dat);
 hdt = hdt(idx);
 
 % Clean up variables and filenames for text file.
-DateTime = dat;
+dat = datevec(dat);
+Year = dat(:,1);
+Month = dat(:,2);
+Day = dat(:,3);
+Hour = dat(:,4);
+Minute = dat(:,5);
+Second = dat(:,6);
+
 HeadingTrue = hdt;
 
 % Makes and saves table for text file.
-t = table(DateTime,HeadingTrue);
+t = table(Year,Month,Day,Hour,Minute,Second,HeadingTrue);
 writetable(t,[filename '.txt']);
+
+
+

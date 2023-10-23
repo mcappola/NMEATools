@@ -119,11 +119,18 @@ lat = lat(idx);
 lon = lon(idx);
 
 % Clean up variables and filenames for text file.
-DateTime = dat;
+dat = datevec(dat);
+Year = dat(:,1);
+Month = dat(:,2);
+Day = dat(:,3);
+Hour = dat(:,4);
+Minute = dat(:,5);
+Second = dat(:,6);
+
 Latitude = round(lat,4);
 Longitude = round(lon,4);
 
 % Makes and saves table for text file.
-t = table(DateTime,Latitude,Longitude);
+t = table(Year,Month,Day,Hour,Minute,Second,Latitude,Longitude);
 writetable(t,[filename '.txt']);
 

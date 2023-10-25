@@ -1,8 +1,8 @@
 # NMEATools
-Functions for extracting data from NMEA formatted files in MATLAB.
+Functions for extracting data from NMEA formatted files in MATLAB and Julia.
 
 Notes:
-Assumes RVDAS format for timestamp. Functions have been tested on multiple UNOLS vessles.
+Assumes RVDAS format for timestamp. Functions have been tested on multiple UNOLS vessles, but timestamp formats can change from ship to ship. 
 
 ___________________________________________________________________________________________________
 

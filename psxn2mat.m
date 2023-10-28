@@ -1,6 +1,6 @@
 function out = psxn2mat(file,varargin)
 
-% Extracts date, heading, pitch, roll, and heave, from NMEA formated 
+% Extracts date, heading, pitch, roll, and heave, from NMEA formatted 
 % Kongsberg SeaPath text files (Text files with a NMEA PSXN line). Saves 
 % output to a matfile and writes the output to a structure in the current 
 % workspace.
@@ -29,7 +29,7 @@ function out = psxn2mat(file,varargin)
 
 % Written by: Michael Cappola (mcappola@udel.edu)
 % Created on: 03/27/2022
-% Last edit: 07/24/2023
+% Last edit: 10/28/2023
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 p = inputParser;

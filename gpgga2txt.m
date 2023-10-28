@@ -1,15 +1,12 @@
 function gpgga2txt(file,varargin)
 
-% Extracts date, latitude, and longitude, from NMEA formated GPS text
+% Extracts date, latitude, and longitude, from NMEA formatted GPS text
 % files (Text files with a NMEA GPGGA line). Saves output to a text file.
 
 % Notes
 % - Accurate datetime extraction assumes the ship is using RVDAS for
 % writing the timestamp. This code has been tested on several UNOLS ships
 % successfully. 
-
-% - Latitude and longitude extraction should always work if the system GPS
-% follows standard NMEA format for writing GPGGA lines. 
 
 % Required Argument     : Filepath
 
@@ -24,7 +21,7 @@ function gpgga2txt(file,varargin)
 
 % Written by: Michael Cappola (mcappola@udel.edu)
 % Created on: 03/27/2022
-% Last edit: 07/24/2023
+% Last edit: 10/28/2023
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 p = inputParser;

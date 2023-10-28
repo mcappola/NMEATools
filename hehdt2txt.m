@@ -1,6 +1,6 @@
 function hehdt2txt(file,varargin)
 
-% Extracts date and heading from NMEA formated gyroscope text files (Text
+% Extracts date and heading from NMEA formatted gyroscope text files (Text
 % files with a NMEA HEHDT line). Saves output to a text file.
 
 % Notes
@@ -20,7 +20,7 @@ function hehdt2txt(file,varargin)
 
 % Written by: Michael Cappola (mcappola@udel.edu)
 % Created on: 03/27/2022
-% Last edit: 07/24/2023
+% Last edit: 10/28/2023
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 p = inputParser;

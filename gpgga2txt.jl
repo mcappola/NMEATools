@@ -1,5 +1,24 @@
+# gpgga2txt.jl
 
-# Test
+# Extracts date, latitude, and longitude, from NMEA formatted GPS text files. Saves the output to a
+# text file in the local directory.
+
+# Note:
+# -Accurate datetime extraction assumes that the ship is using RVDAS for writing the timestamp. This
+# code has been tested on several UNOLS ships successfully, but datestamp format has been known to 
+# change on non UNOLS research vessels. 
+
+# Input			: Filepath
+
+# Output 		: gpgga.txt with the following fields
+#				-Datetime (UTC): yyyy,mm,dd,HH,MM,SS.SS
+#				-Longitude (Decimal)
+#				-Latitude (Decimal)
+
+# Created on: 10/20/2023
+# Last edit: 10/28/2023
+# Michael Cappola (mcappola@udel.edu)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 using Dates
 

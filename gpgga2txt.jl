@@ -27,7 +27,7 @@ function gpgga2txt(filename)
 open("gpgga.txt","w") do file
 
 	# Write Headerline
-	println(file,"Year,Month,Day,Minute,Second,Latitude,Longitude")
+	println(file,"Year,Month,Day,Hour,Minute,Second,Latitude,Longitude")
 
 	# Loop through data file
 	for line in eachline(filename)

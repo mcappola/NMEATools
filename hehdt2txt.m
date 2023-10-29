@@ -25,7 +25,7 @@ function hehdt2txt(file,varargin)
 
 p = inputParser;
 addRequired(p,'file');
-addParameter(p,'OutputFilename','hehdt');         
+addParameter(p,'OutputFilename','hehdt.txt');         
 addParameter(p,'Truncate',1);  
 parse(p,file,varargin{:});
 
@@ -100,7 +100,7 @@ HeadingTrue = hdt;
 
 % Makes and saves table for text file.
 t = table(Year,Month,Day,Hour,Minute,Second,HeadingTrue);
-writetable(t,[filename '.txt']);
+writetable(t,filename);
 
 
 

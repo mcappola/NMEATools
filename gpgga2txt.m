@@ -26,7 +26,7 @@ function gpgga2txt(file,varargin)
 
 p = inputParser;
 addRequired(p,'file');
-addParameter(p,'OutputFilename','gpgga');         
+addParameter(p,'OutputFilename','gpgga.txt');         
 addParameter(p,'Truncate',1);  
 parse(p,file,varargin{:});
 
@@ -129,5 +129,5 @@ Longitude = round(lon,4);
 
 % Makes and saves table for text file.
 t = table(Year,Month,Day,Hour,Minute,Second,Latitude,Longitude);
-writetable(t,[filename '.txt']);
+writetable(t,filename);
 

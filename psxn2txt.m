@@ -33,7 +33,7 @@ function psxn2txt(file,varargin)
 
 p = inputParser;
 addRequired(p,'file');
-addParameter(p,'OutputFilename','psxn');         
+addParameter(p,'OutputFilename','psxn.txt');         
 addParameter(p,'Truncate',1);  
 parse(p,file,varargin{:});
 
@@ -144,4 +144,4 @@ Pitch = pit;
 
 % Makes and saves table for text file.
 t = table(Year,Month,Day,Hour,Minute,Second,HeadingTrue,Heave,Roll,Pitch);
-writetable(t,[filename '.txt']);
+writetable(t,filename);

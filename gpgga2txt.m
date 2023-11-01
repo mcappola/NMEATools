@@ -10,7 +10,7 @@ function gpgga2txt(file,varargin)
 
 % Required Argument     : Filepath
 
-% Optional Arguments    : OutputFilename -(No ext) Default is gppga.txt
+% Optional Arguments    : OutputFilename - Default is gppga.txt
 %                       : Truncate - Number of skipped data lines.
 %                       Decreases data output density. Default is 1 which 
 %                       keeps every scan. 10 would save every 10th scan.

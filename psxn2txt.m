@@ -15,7 +15,7 @@ function psxn2txt(file,varargin)
 
 % Required Argument     : Filepath
 
-% Optional Arguments    : OutputFilename -(No ext) Default is psxn.txt
+% Optional Arguments    : OutputFilename - Default is psxn.txt
 %                       : Truncate - Number of skipped data lines.
 %                       Decreases data output density. Default is 1 which 
 %                       keeps every scan. 10 would save every 10th scan.

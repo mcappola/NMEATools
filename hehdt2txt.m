@@ -10,7 +10,7 @@ function hehdt2txt(file,varargin)
 
 % Required Argument     : Filepath
 
-% Optional Arguments    : OutputFilename -(No ext) Default is hehdt.txt
+% Optional Arguments    : OutputFilename - Default is hehdt.txt
 %                       : Truncate - Number of skipped data lines.
 %                       Decreases data output density. Default is 1 which 
 %                       keeps every scan. 10 would save every 10th scan.

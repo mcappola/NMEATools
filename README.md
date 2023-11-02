@@ -16,6 +16,8 @@ hehdt2mat.m -- Extracts datetime, and heading, from gyroscope data formatted in 
 
 hehdt2txt.m -- Extracts datetime, and heading, from gyroscope data formatted in NMEA HEHDT lines and saves to a text file.
 
+gpgga2txt.jl -- Extracts datetime and heading true from gyroscope data formatted in NMEA HEHDT lines and saves to a text file. Fast! Use for larger files.
+
 psxn2mat.m -- Extracts datetime, heading, pitch, roll, and heave, from Kongsberg SeaPath accelerometer data formatted in NMEA PSXN lines and saves in the MATLAB environment.
 
 psxn2txt.m -- Extracts datetime, heading, pitch, roll, and heave, from Kongsberg SeaPath accelerometer data formatted in NMEA PSXN lines and saves to a text file.

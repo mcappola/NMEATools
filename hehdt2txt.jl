@@ -63,7 +63,7 @@ open("hehdt.txt","w") do file
 				sec = round(sec, digits = 2)
 
 				# Extract Heading
-                		heading = elements[2]
+                heading = elements[2]
 
 			else
 				year = NaN

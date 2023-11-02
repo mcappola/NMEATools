@@ -61,7 +61,7 @@ open("gpgga.txt","w") do file
 				hour = parse(Int16,dateelem[2])
 				mmm = parse(Int16,dateelem[3])
 				sec = parse(Float16,dateelem[4])
-				sec = round(sec, digits = 3)
+				sec = round(sec, digits = 2)
 
 				# Extract Latitude and convert to decimal			
 				lat = elements[3]

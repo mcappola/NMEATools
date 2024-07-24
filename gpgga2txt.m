@@ -1,16 +1,12 @@
 function gpgga2txt(file,varargin)
 
 % Extracts date, latitude, and longitude, from NMEA formatted GPS text
-% files (Text files with a NMEA GPGGA line). Saves output to a text file.
-
-% Notes
-% - Accurate datetime extraction assumes the ship is using RVDAS for
-% writing the timestamp. This code has been tested on several UNOLS ships
-% successfully. 
+% files (Text files with a NMEA GPGGA line). Saves output to a text file. 
+% Uses the GPGGA and GPZDA lines.
 
 % Required Argument     : Filepath
 
-% Optional Arguments    : OutputFilename - Default is gppga.txt
+% Optional Arguments    : OutputFilename -(No ext) Default is gppga.txt
 %                       : Truncate - Number of skipped data lines.
 %                       Decreases data output density. Default is 1 which 
 %                       keeps every scan. 10 would save every 10th scan.
@@ -21,7 +17,7 @@ function gpgga2txt(file,varargin)
 
 % Written by: Michael Cappola (mcappola@udel.edu)
 % Created on: 03/27/2022
-% Last edit: 10/28/2023
+% Last edit: 07/24/2024
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 p = inputParser;
@@ -46,8 +42,11 @@ while ischar(tline)
 end
 fclose(fid);
 
-% Format of "GPGGA" Line.
-fmt = '%f+%f:%f:%f:%f %c%c%c%c%c%c,%f,%f,%c,%f,%c,%f,%f,%f,%f,%c,%f,%c,%s';
+% Format of GPGGA line.
+gfmt = '%6c,%f,%f,%c,%f,%c,%f,%f,%f,%f,%c,%f,%c,%s';
+
+% Format for GPZDA line.
+dfmt = '%6c,%2f%2f%f,%f,%f,%f';
 
 % Preallocation.
 dat = nan(floor(n/truncate),6);
@@ -59,48 +58,64 @@ fid = fopen(file);
 tline = fgetl(fid);
 n = 0;
 k = 0;
+m = 0;
+h = 0;
 while ischar(tline)
-    if contains(tline,'GPGGA')
+    if contains(tline,'GPZDA')
         n=n+1;
         if rem(n,truncate)==0
             k = k+1;
-            a = textscan(tline,fmt);    % Builds char of selected line w/ fmt.
             
-            %Date
-            yr = a{1} + 2000;           % Convert RVDAS Year fmt to year
-            dt = datevec(datenum(yr, ones(size(yr)), a{2}));    %ddd -> mmdd
-            mm = dt(:,2);               % Mon
-            dd = dt(:,3);               % Day
-            dt(4) = a{3};               % Hr
-            dt(5) = a{4};               % Min
-            dt(6) = a{5};               % Sec
-            dat(k,:) = dt;
+            kill = find(tline=='$');
+            tline(1:(kill-1)) = [];
             
-            if ~isempty(a{13}|a{15})            % Checks if GPS is running.
+            a = textscan(tline,dfmt);
+            hh = a{2};
+            MM = a{3};
+            ss = a{4};
+            dd = a{5};
+            mm = a{6};
+            yy = a{7};
+            
+            dat(k,:) = [yy,mm,dd,hh,MM,ss];
+        end
+    end
+    
+    if contains(tline,'GPGGA')
+        m=m+1;
+        if rem(m,truncate)==0
+            h=h+1;
+            
+            kill = find(tline=='$');
+            tline(1:(kill-1)) = [];
+            
+            a = textscan(tline,gfmt);    % Builds char of selected line w/ fmt.
+
+            if ~isempty(a{3}|a{5})            % Checks if GPS is running.
                 %Latitude
-                deg = floor(a{13}/100);         % Pull Degree out
-                min = (a{13}/100 - deg)*100;    % Pull Minute out
+                deg = floor(a{3}/100);         % Pull Degree out
+                min = (a{3}/100 - deg)*100;    % Pull Minute out
                 dec = min/60;                   % Convert Minute to Dec
                 com = deg + dec;                % Combine
-                if a{14} == 'N'                 % N = +, S = -.
-                    lat(k,:) = com;
+                if a{4} == 'N'                 % N = +, S = -.
+                    lat(h,:) = com;
                 else
-                    lat(k,:) = com*-1;
+                    lat(h,:) = com*-1;
                 end
                 
                 %Longitude
-                deg = floor(a{15}/100);         % Pull Degree out
-                min = (a{15}/100 - deg)*100;    % Pull Minute out
+                deg = floor(a{5}/100);         % Pull Degree out
+                min = (a{5}/100 - deg)*100;    % Pull Minute out
                 dec = min/60;                   % Convert Minute to Dec
                 com = deg + dec;                % Combine
-                if a{16} == 'E'                 % E = +, W = -.
-                    lon(k,:) = com;
+                if a{6} == 'E'                 % E = +, W = -.
+                    lon(h,:) = com;
                 else
-                    lon(k,:) = com*-1;
+                    lon(h,:) = com*-1;
                 end
             else
-                lat(k,:) = nan;                 % Records nan if GPS is off.
-                lon(k,:) = nan;
+                lat(h,:) = nan;                 % Records nan if GPS is off.
+                lon(h,:) = nan;
             end            
         end
     end

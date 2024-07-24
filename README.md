@@ -1,10 +1,10 @@
-# NMEATools v1.0
+# NMEATools v1.1
 Functions for extracting data from NMEA formatted files in MATLAB and Julia.
 
 Notes:
 Currently assumes RVDAS format for timestamp. Functions have been tested on multiple UNOLS vessles, but timestamp formats can change from ship to ship. 
 
-Working on an update that uses the GPZDA line for datetime instead of the ship specific timetag. This will be integrated into the gpgga and hehdt functions where millisecond precision isn't needed. The psxn files will get a difference approach, as millisecond changes could matter for some instruments that require the accelerometer data.
+- This has been fixed for gpgga2mat.m abd gpgga2txt.m. Date is now pulled from the GPZDA line, so these will now work for any GPS output.
 
 ___________________________________________________________________________________________________
 

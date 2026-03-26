@@ -1,4 +1,4 @@
-# NMEATools v1.1
+# NMEATools v1.2
 Tools for extracting data from NMEA formatted files in MATLAB and Julia.
 
 TODO:
@@ -8,7 +8,9 @@ TODO:
 Notes:
 - gpgga2mat.m and gpgga2txt.m are considered general purpose tools. They pull datetime from the GPZDA line, so are written in a way that can be applied to any standard NMEA formatted GPS output. These functions have been tested on UNOLS vessles and BAS vessles. gpgga2txt.jl still assumes RVDAS timetag format, but will be updated in a future version.
 
-- hehdt and psxn files do not have a GPZDA line so these functions rely on the ship's timetag for datetime. All hehdt and psxn functions assume RVDAS timetag format.
+- hehdt and psxn files do not have a GPZDA line so these functions rely on the ship's timetag for datetime. All hehdt and psxn functions assume RVDAS timetag format. 
+
+-!-v1.2 psxn2mat.m was updated to handle the time format on the Rodger Revelle. This is temporary-!-
 
 ___________________________________________________________________________________________________
 

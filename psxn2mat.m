@@ -55,7 +55,12 @@ end
 fclose(fid);
 
 % Format of text line.
-fmt = '%f+%f:%f:%f:%f %c%c%c%c%c,%f,%f,%f,%f,%f*%f';
+
+% This worked on the Lawrence M. Gould
+% fmt = '%f+%f:%f:%f:%f %c%c%c%c%c,%f,%f,%f,%f,%f*%f';  
+
+% This worked on the Rodger Revelle
+fmt = '%f-%f-%fT%f:%f:%fZ,%c%c%c%c%c,%f,%f,%f,%f,%f*%f';
 
 dat = nan(n,6);
 rol = nan(n,1);
@@ -76,29 +81,35 @@ while ischar(tline)
     if contains(tline,'PSXN,20')
         k=k+1;
         b = textscan(tline,fmt);    % Builds char of selected line w/ fmt.
-        rolcheck(k) = b{12};
-        pitcheck(k) = b{13};
-        hdtcheck(k) = b{14};
-        hvecheck(k) = b{15};
+        rolcheck(k) = b{13};
+        pitcheck(k) = b{14};
+        hdtcheck(k) = b{15};
+        hvecheck(k) = b{16};
     end
     if contains(tline,'PSXN,23')
         h=h+1;
         a = textscan(tline,fmt);    % Builds char of selected line w/ fmt.
         
         %Date
-        yr = a{1} + 2000;           % Convert RVDAS Year fmt to year
-        dt = datevec(datenum(yr, ones(size(yr)), a{2}));    %ddd -> mmdd
-        mm = dt(:,2);               % Mon
-        dd = dt(:,3);               % Day
-        dt(4) = a{3};               % Hr
-        dt(5) = a{4};               % Min
-        dt(6) = a{5};               % Sec
-        dat(h,:) = dt;
+        yr = a{1};           % Convert RVDAS Year fmt to year
+%         dt = datevec(datenum(yr, ones(size(yr)), a{2}));    %ddd -> mmdd
+%         mm = dt(:,2);               % Mon
+%         dd = dt(:,3);               % Day
+        mm = a{2};
+        dd = a{3};
+        hr = a{4};               % Hr
+        mn = a{5};               % Min
+        sc = a{6};               % Sec
+        dat(h,:) = [yr mm dd hr mn sc];
         
-        rol(h) = a{12};
-        pit(h) = a{13};
-        hdt(h) = a{14};
-        hve(h) = a{15};
+        rol(h) = a{13};
+        pit(h) = a{14};
+        hdt(h) = a{15};
+        try
+            hve(h) = a{16};
+        catch
+            disp(a{15});
+        end
     end
     tline = fgetl(fid);
 end
@@ -129,7 +140,7 @@ hve = hve(idx);
 rol = rol(idx);
 pit = pit(idx);
 
-save([filename '.mat'],'dat','hdt','hve','rol','pit')
+% save([filename '.mat'],'dat','hdt','hve','rol','pit')
 
 out.dat = dat;
 out.hdt = hdt;
